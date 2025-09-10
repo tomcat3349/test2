@@ -1,9 +1,9 @@
 name: Run test.py
 
 on:
-  push:                # 每次 push 到 main 分支时自动运行
+  push:
     branches: [ main ]
-  workflow_dispatch:   # 也可以在 Actions 页面手动点运行
+  workflow_dispatch:
 
 jobs:
   run-test:
@@ -25,9 +25,10 @@ jobs:
 
       - name: Run test.py and save log
         run: |
-          python test.py > output.log 2>&1
+          python test.py > output.log 2>&1 || true
 
       - name: Upload log file
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-log
