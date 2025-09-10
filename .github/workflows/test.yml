@@ -4,6 +4,8 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
+  schedule:
+    - cron: '55 23 * * *'   # 每天 UTC 23:55 = 北京时间次日 07:55 自动运行
 
 jobs:
   run-test:
